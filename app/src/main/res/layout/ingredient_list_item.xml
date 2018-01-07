@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Whipped Cream"
+        android:paddingRight="5dp"
+        android:id="@+id/tv_ingredient_name"
+        android:paddingLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="2"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:id="@+id/tv_ingredient_quantity"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="(G)"
+        android:id="@+id/tv_ingredient_measure"/>
+
+</LinearLayout>

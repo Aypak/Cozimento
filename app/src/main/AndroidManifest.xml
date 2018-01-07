@@ -18,10 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
-            android:authorities="com.hoaxyinnovations.cozimento"
             android:name=".database.RecipesProvider"
-            android:exported="false"/>
+            android:authorities="com.hoaxyinnovations.cozimento"
+            android:exported="false" />
+
+        <activity android:name=".DetailActivity"></activity>
     </application>
 
 </manifest>
