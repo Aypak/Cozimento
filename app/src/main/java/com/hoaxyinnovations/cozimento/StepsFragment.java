@@ -2,7 +2,6 @@ package com.hoaxyinnovations.cozimento;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,11 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.hoaxyinnovations.cozimento.ui.IngredientsAdapter;
-import com.hoaxyinnovations.cozimento.ui.StepsAdapter;
-
-import static com.hoaxyinnovations.cozimento.DetailActivity.*;
 
 
 /**
@@ -49,7 +43,7 @@ public class StepsFragment extends android.support.v4.app.Fragment{
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
 
 
-        mStepsAdapter = new StepsAdapter(getContext(),mStepsData);
+        mStepsAdapter = new StepsAdapter(getContext(),mStepsData,mListener);
         stepsRV.setLayoutManager(linearLayoutManager);
         stepsRV.setAdapter(mStepsAdapter);
 
@@ -74,9 +68,7 @@ public class StepsFragment extends android.support.v4.app.Fragment{
         return mContext;
     }
 
-    public interface OnStepSelectedListener{
-        public void onStepSelected(Uri stepUri);
-    }
+
 
 
 

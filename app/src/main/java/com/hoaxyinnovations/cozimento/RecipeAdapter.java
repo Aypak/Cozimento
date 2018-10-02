@@ -1,4 +1,4 @@
-package com.hoaxyinnovations.cozimento.ui;
+package com.hoaxyinnovations.cozimento;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.hoaxyinnovations.cozimento.DetailActivity;
-import com.hoaxyinnovations.cozimento.R;
 import com.hoaxyinnovations.cozimento.database.RecipesContract;
 
 import butterknife.BindView;

@@ -1,6 +1,5 @@
-package com.hoaxyinnovations.cozimento.ui;
+package com.hoaxyinnovations.cozimento;
 
-import android.content.ContentProvider;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.hoaxyinnovations.cozimento.R;
 import com.hoaxyinnovations.cozimento.database.RecipesContract;
 
 import butterknife.BindView;

@@ -1,25 +1,35 @@
 package com.hoaxyinnovations.cozimento;
 
+import android.content.ContentUris;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.hoaxyinnovations.cozimento.database.RecipesContract;
 
 import timber.log.Timber;
 
-public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,OnStepSelectedListener{
     final int ID_INGREDIENTS_LOADER = 100;
     final int ID_STEPS_LOADER = 101;
     private Cursor ingredientsData;
     private Cursor stepsData;
     final String TAG = DetailActivity.class.getSimpleName();
-    private RecipeDetailFragment recipeDetailFragment;
+    private StepsFragment stepsFragment;
+    IngredientFragment ingredientFragment;
+    RecipeStepFragment recipeStepFragment;
+    boolean mTwoPane;
+    FragmentManager fragmentManager;
 
 
     @Override
@@ -27,21 +37,59 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        Timber.plant(new Timber.DebugTree());
+        if(findViewById(R.id.land_step_detail_container) != null){
+            mTwoPane = true;
+            FrameLayout recipeDetailContainer = (FrameLayout) findViewById(R.id.recipe_detail_container);
+            recipeDetailContainer.setVisibility(View.GONE);
+            Timber.plant(new Timber.DebugTree());
 
-        LoaderManager.LoaderCallbacks<Cursor> callback = DetailActivity.this;
 
-        getSupportLoaderManager().initLoader(ID_INGREDIENTS_LOADER, null, callback);
-        getSupportLoaderManager().initLoader(ID_STEPS_LOADER, null, callback);
+            LoaderManager.LoaderCallbacks<Cursor> callback = DetailActivity.this;
 
-        recipeDetailFragment = new RecipeDetailFragment();
+            getSupportLoaderManager().initLoader(ID_INGREDIENTS_LOADER, null, callback);
+            getSupportLoaderManager().initLoader(ID_STEPS_LOADER, null, callback);
 
-        recipeDetailFragment.setmIngredientsData(ingredientsData);
-        recipeDetailFragment.setmStepsData(stepsData);
+            stepsFragment = new StepsFragment();
+            ingredientFragment = new IngredientFragment();
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.recipe_detail_container,recipeDetailFragment).commit();
+
+            ingredientFragment.setmIngredientsData(ingredientsData);
+
+            stepsFragment.setmStepsData(stepsData);
+
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.ingredient_container, ingredientFragment)
+                    .add(R.id.land_step_detail_container,stepsFragment)
+                    .commit();
+        }
+        else{
+            mTwoPane = false;
+            Timber.plant(new Timber.DebugTree());
+
+
+            LoaderManager.LoaderCallbacks<Cursor> callback = DetailActivity.this;
+
+            getSupportLoaderManager().initLoader(ID_INGREDIENTS_LOADER, null, callback);
+            getSupportLoaderManager().initLoader(ID_STEPS_LOADER, null, callback);
+
+            stepsFragment = new StepsFragment();
+            ingredientFragment = new IngredientFragment();
+
+
+            ingredientFragment.setmIngredientsData(ingredientsData);
+
+            stepsFragment.setmStepsData(stepsData);
+
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.ingredient_container, ingredientFragment)
+                    .add(R.id.recipe_detail_container,stepsFragment)
+                    .commit();
+
+        }
+
+
 
 
 
@@ -84,13 +132,12 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             case ID_INGREDIENTS_LOADER:
                 Timber.d("ingredients data loaded");
                 ingredientsData = data;
-                recipeDetailFragment.mIngredientsAdapter.swapCursor(ingredientsData);
+                ingredientFragment.mIngredientsAdapter.swapCursor(ingredientsData);
                 break;
             case ID_STEPS_LOADER:
                 Timber.d("steps data loaded");
                 stepsData = data;
-                recipeDetailFragment.mStepsAdapter.swapCursor(stepsData);
-
+                stepsFragment.mStepsAdapter.swapCursor(stepsData);
                 break;
         }
 
@@ -99,6 +146,33 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
+
+    @Override
+    public void getStepID(Bundle stepDetailsl) {
+
+        /*Timber.d(stepDetailsl.getString("step_videoURL")+ ": retrieved in detailactivity");
+        Timber.d(stepDetailsl.getString("step_description")+ ": retrieved in detailactivity");
+
+*/
+        if(mTwoPane){
+            recipeStepFragment = new RecipeStepFragment();
+            recipeStepFragment.setStepDetails(stepDetailsl);
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.land_step_description_container,recipeStepFragment)
+                    .commit();
+        }
+        else{
+            Context context = this;
+            Class destinationClass = StepDetailActivity.class;
+            Intent intent = new Intent(context,destinationClass);
+            intent.putExtras(stepDetailsl);
+            Timber.d("Extras sent to recipedetails activity");
+            context.startActivity(intent);
+        }
 
     }
 }

@@ -15,8 +15,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.hoaxyinnovations.cozimento.database.RecipesContract;
-import com.hoaxyinnovations.cozimento.database.RecipesProvider;
-import com.hoaxyinnovations.cozimento.ui.RecipeAdapter;
 import com.hoaxyinnovations.cozimento.utilities.JsonUtils;
 import com.hoaxyinnovations.cozimento.utilities.NetworkUtils;
 

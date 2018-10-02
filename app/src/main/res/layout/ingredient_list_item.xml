@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="start|center_horizontal"
     android:orientation="horizontal">
+
     <TextView
+        android:id="@+id/tv_ingredient_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingEnd="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="18sp"
         tools:text="Whipped Cream"
         android:paddingRight="5dp"
-        android:id="@+id/tv_ingredient_name"
-        android:paddingLeft="5dp" />
+        android:paddingStart="8dp" />
 
     <TextView
+        android:id="@+id/tv_ingredient_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="2"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp"
-        android:id="@+id/tv_ingredient_quantity"/>
+        android:padding="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="18sp"
+        tools:text="2" />
 
     <TextView
+        android:id="@+id/tv_ingredient_measure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="(G)"
-        android:id="@+id/tv_ingredient_measure"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="18sp"
+        tools:text="(G)" />
 
 </LinearLayout>
