@@ -40,8 +40,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         mData.moveToPosition(position);
         String recipeName = mData.getString(mData.getColumnIndex(RecipesContract.RecipeEntry.COLUMN_RECIPE_NAME));
         String recipeServings = mData.getString(mData.getColumnIndex(RecipesContract.RecipeEntry.COLUMN_RECIPE_SERVINGS));
-        holder.recipeID = mData.getString(mData.getColumnIndex(RecipesContract.RecipeEntry.COLUMN_RECIPE_ID));
 
+
+        holder.recipeID = mData.getString(mData.getColumnIndex(RecipesContract.RecipeEntry.COLUMN_RECIPE_ID));
         holder.recipeName.setText(recipeName);
         holder.recipeServings.setText(recipeServings);
 
@@ -64,6 +65,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         @BindView(R.id.tv_servings) TextView recipeServings;
         String recipeID;
 
+
         ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
@@ -72,12 +74,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         @Override
         public void onClick(View view) {
-            Context context = getContext();
-            Class destinationClass = DetailActivity.class;
-            Intent intent = new Intent(context,destinationClass);
-            intent.putExtra("recipe_id",this.recipeID);
+            Intent intent = new Intent(getContext(),DetailActivity.class);
+            intent.putExtra(DetailActivity.EXTRA_RECIPE_ID,this.recipeID);
             Timber.d(this.recipeID);
-            context.startActivity(intent);
+            getContext().startActivity(intent);
         }
     }
 

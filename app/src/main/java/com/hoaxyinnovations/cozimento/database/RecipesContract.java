@@ -8,6 +8,9 @@ import android.provider.BaseColumns;
  */
 
 public class RecipesContract {
+
+    public static final String INVALID_RECIPE_ID = "-1";
+
     public static final String CONTENT_AUTHORITY = "com.hoaxyinnovations.cozimento";
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);

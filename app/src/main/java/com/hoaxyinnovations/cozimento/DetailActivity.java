@@ -1,12 +1,11 @@
 package com.hoaxyinnovations.cozimento;
 
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -15,9 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.hoaxyinnovations.cozimento.database.RecipesContract;
-
 import timber.log.Timber;
+
+import static com.hoaxyinnovations.cozimento.database.RecipesContract.*;
 
 public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,OnStepSelectedListener{
     final int ID_INGREDIENTS_LOADER = 100;
@@ -31,11 +30,16 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     boolean mTwoPane;
     FragmentManager fragmentManager;
 
+    public static final String EXTRA_RECIPE_ID = "com.hoaxyinnovations.cozimento.RECIPE_ID";
+
+    String mRecipeID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        mRecipeID = getIntent().getStringExtra(EXTRA_RECIPE_ID);
 
         if(findViewById(R.id.land_step_detail_container) != null){
             mTwoPane = true;
@@ -97,10 +101,10 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String recipe_id = getIntent().getStringExtra("recipe_id");
+
         switch (id){
             case ID_INGREDIENTS_LOADER:
-                Uri ingredientsUri = RecipesContract.IngredientEntry.CONTENT_URI.buildUpon().appendPath(recipe_id).build();
+                Uri ingredientsUri = IngredientEntry.CONTENT_URI.buildUpon().appendPath(mRecipeID).build();
 
                 return new CursorLoader(this,
                         ingredientsUri,
@@ -112,7 +116,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
 
             case ID_STEPS_LOADER:
-                Uri stepsUri = RecipesContract.StepEntry.CONTENT_URI.buildUpon().appendPath(recipe_id).build();
+                Uri stepsUri = StepEntry.CONTENT_URI.buildUpon().appendPath(mRecipeID).build();
 
                 return new CursorLoader(this,
                         stepsUri,

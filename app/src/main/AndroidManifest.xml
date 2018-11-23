@@ -22,10 +22,24 @@
         <provider
             android:name=".database.RecipesProvider"
             android:authorities="com.hoaxyinnovations.cozimento"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity android:name=".DetailActivity" />
-        <activity android:name=".StepDetailActivity"></activity>
+        <activity
+            android:name=".StepDetailActivity"
+            android:configChanges="orientation|screenSize|layoutDirection" />
+
+        <receiver android:name=".RecipeWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/recipe_widget_info" />
+        </receiver>
+        <service android:name="GridWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
     </application>
 
 </manifest>

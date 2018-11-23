@@ -10,9 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hoaxyinnovations.cozimento.database.RecipesContract;
-import com.hoaxyinnovations.cozimento.model.Step;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +23,6 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder>{
     private Cursor mData;
     private Context mContext;
 
-    private List<Step> steps;
     public OnStepSelectedListener onStepSelectedListener;
 
 

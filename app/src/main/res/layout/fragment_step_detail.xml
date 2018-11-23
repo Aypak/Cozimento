@@ -2,38 +2,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/shortDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:paddingTop="8dp"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Recipe Introduction" />
-
+<FrameLayout
+    android:id="@+id/main_media_frame"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="0.5"
+    android:background="#000000">
 
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/playerView"
         android:layout_width="match_parent"
-        android:padding="10dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center" />
 
-        />
+</FrameLayout>
 
-
-    <TextView
-        android:id="@+id/stepDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="8dp"
-        android:textSize="18sp"
-        tools:text="Melt 2 cups of butter"
-        android:paddingStart="8dp" />
+<TextView
+    android:id="@+id/stepDescription"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="0.5"
+    android:background="#757575"
+    android:gravity="center"
+    tools:text="Melt 2 cups of butter"
+    android:textColor="#FFFFFF"
+    android:textSize="24sp" />
 
 </LinearLayout>
